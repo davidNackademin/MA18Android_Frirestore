@@ -36,22 +36,28 @@ public class MainActivity extends AppCompatActivity {
 
         // i firestore sparas alla dokument som key-value par
         // vi kan skriva direkt till firestore genom att skapa en hashmap
+
+
   /*
         Map<String, Object> ost = new HashMap<>();
 
+        // lägg till ett par key- value par i hash-mapen
         ost.put("name", "ost");
         ost.put("completed", false);
 
-
+        // ta dokumentet ost som finns i collection items och sätt det till vår hashmap ost
         db.collection("items").document("ost").set(ost);
 
+        // skapa en genväg till en collection
         CollectionReference itemsRef = db.collection("items");
 
+        // lägg till ost till items. Firestore ger documentet ett eget namn
         itemsRef.add(ost);
 
+        //skapa en genväg till ett dokument
         DocumentReference ostRef = db.collection("items").document("ost");
 */
-        //
+
 
         // vi kan läsa från vår databas endast en gång:
         // (men oftast vill vi i ställlet prenumerera på förändringar)
@@ -82,22 +88,28 @@ public class MainActivity extends AppCompatActivity {
         // och java objekt
 
 
-        for(int i = 0; i < 5; i++) {
-            Item item = new Item("item"+i, false);
-            db.collection("items").add(item);
-        }
+        //skapa 5 st Item-objekt ochh lägg till dom i vår databas
+//        for(int i = 0; i < 5; i++) {
+//            Item item = new Item("item"+i, false);
+//            db.collection("items").add(item);
+//        }
 
         CollectionReference itemsRef = db.collection("items");
 
+
+        //skapa en array som vi kan spara våra objekt som finns på firestore
         final List<Item> items = new ArrayList<>();
 
+
+        //lyssna efter förändringar som görs i vår items-collection
         itemsRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
                 items.clear();
 
+               // för varje document som finns i items-collection
                 for (DocumentSnapshot snapshot : queryDocumentSnapshots) {
-
+                    // gör om det documentet till ett Item objekt och lägg till i vår lista
                     Item item = snapshot.toObject(Item.class);
                     items.add(item);
                 }
