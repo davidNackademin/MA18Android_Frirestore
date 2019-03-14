@@ -30,21 +30,31 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        // en referens till vår databas
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-//
-//        Map<String, Object> ost = new HashMap<>();
-//
-//        ost.put("name", "ost");
-//        ost.put("completed", false);
-//
-//        db.collection("items").document("ost").set(ost);
-//
-//        CollectionReference itemsRef = db.collection("items");
-//
-//        itemsRef.add(ost);
 
- //       DocumentReference ostRef = db.collection("items").document("ost");
+        // i firestore sparas alla dokument som key-value par
+        // vi kan skriva direkt till firestore genom att skapa en hashmap
+  /*
+        Map<String, Object> ost = new HashMap<>();
 
+        ost.put("name", "ost");
+        ost.put("completed", false);
+
+
+        db.collection("items").document("ost").set(ost);
+
+        CollectionReference itemsRef = db.collection("items");
+
+        itemsRef.add(ost);
+
+        DocumentReference ostRef = db.collection("items").document("ost");
+*/
+        //
+
+        // vi kan läsa från vår databas endast en gång:
+        // (men oftast vill vi i ställlet prenumerera på förändringar)
 //        ostRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
 //            @Override
 //            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -57,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
 
+        // vi lyssnar efter förändringar på vår "ost"
 //        ostRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
 //            @Override
 //            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
@@ -65,6 +76,10 @@ public class MainActivity extends AppCompatActivity {
 //                }
 //            }
 //        });
+
+        // i stället för hash-maps vill vi vanligtvis använda java-object
+        // enkla objekt kan automatiskt konverteras mellan firstore-key-value par
+        // och java objekt
 
 
         for(int i = 0; i < 5; i++) {

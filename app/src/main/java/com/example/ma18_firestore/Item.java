@@ -1,5 +1,6 @@
 package com.example.ma18_firestore;
 
+
 public class Item {
     String name;
     boolean done;
@@ -9,6 +10,8 @@ public class Item {
         this.id = id;
     }
 
+    // måste finnas med en default konstruktör för att
+    // det ska gå att generera objekt utifrån firebase-snapshot
     public Item() {}
 
     public Item(String name, boolean done) {
